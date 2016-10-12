@@ -28,6 +28,9 @@
 		4368AE171DAE08F5006C38F5 /* DJLineChatListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368AE161DAE08F5006C38F5 /* DJLineChatListModel.m */; };
 		4368AE1C1DAE0904006C38F5 /* DJWeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368AE191DAE0904006C38F5 /* DJWeatherCell.m */; };
 		4368AE1D1DAE0904006C38F5 /* DJWeatherCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368AE1B1DAE0904006C38F5 /* DJWeatherCollectionCell.m */; };
+		4368AE201DAE1D11006C38F5 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4368AE1F1DAE1D11006C38F5 /* LaunchImage.png */; };
+		4368AE261DAE2F0B006C38F5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368AE231DAE2F0B006C38F5 /* UIImage+ImageEffects.m */; };
+		4368AE271DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4368AE251DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,11 @@
 		4368AE1A1DAE0904006C38F5 /* DJWeatherCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWeatherCollectionCell.h; sourceTree = "<group>"; };
 		4368AE1B1DAE0904006C38F5 /* DJWeatherCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWeatherCollectionCell.m; sourceTree = "<group>"; };
 		4368AE1E1DAE0920006C38F5 /* DJDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJDefines.h; sourceTree = "<group>"; };
+		4368AE1F1DAE1D11006C38F5 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
+		4368AE221DAE2F0B006C38F5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		4368AE231DAE2F0B006C38F5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		4368AE241DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		4368AE251DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,7 @@
 		4368ADD31DAE07D0006C38F5 /* DJWeather */ = {
 			isa = PBXGroup;
 			children = (
+				4368AE211DAE2F0B006C38F5 /* LBBlurredImage */,
 				4368ADEC1DAE08B1006C38F5 /* Masonry */,
 				4368ADEB1DAE0856006C38F5 /* Class */,
 				4368ADD71DAE07D0006C38F5 /* AppDelegate.h */,
@@ -134,6 +143,7 @@
 		4368ADEB1DAE0856006C38F5 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4368AE1F1DAE1D11006C38F5 /* LaunchImage.png */,
 				4368AE151DAE08F5006C38F5 /* DJLineChatListModel.h */,
 				4368AE161DAE08F5006C38F5 /* DJLineChatListModel.m */,
 				4368AE181DAE0904006C38F5 /* DJWeatherCell.h */,
@@ -178,6 +188,17 @@
 				4368AE061DAE08B1006C38F5 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		4368AE211DAE2F0B006C38F5 /* LBBlurredImage */ = {
+			isa = PBXGroup;
+			children = (
+				4368AE221DAE2F0B006C38F5 /* UIImage+ImageEffects.h */,
+				4368AE231DAE2F0B006C38F5 /* UIImage+ImageEffects.m */,
+				4368AE241DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.h */,
+				4368AE251DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.m */,
+			);
+			path = LBBlurredImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4368AE071DAE08B1006C38F5 /* Info.plist in Resources */,
+				4368AE201DAE1D11006C38F5 /* LaunchImage.png in Resources */,
 				4368ADE41DAE07D0006C38F5 /* LaunchScreen.storyboard in Resources */,
 				4368ADE11DAE07D0006C38F5 /* Assets.xcassets in Resources */,
 				4368ADDF1DAE07D0006C38F5 /* Main.storyboard in Resources */,
@@ -266,7 +288,9 @@
 				4368AE111DAE08B1006C38F5 /* ViewController+MASAdditions.m in Sources */,
 				4368AE101DAE08B1006C38F5 /* View+MASAdditions.m in Sources */,
 				4368AE141DAE08BD006C38F5 /* DJWeatherController.m in Sources */,
+				4368AE261DAE2F0B006C38F5 /* UIImage+ImageEffects.m in Sources */,
 				4368AE0C1DAE08B1006C38F5 /* MASViewAttribute.m in Sources */,
+				4368AE271DAE2F0B006C38F5 /* UIImageView+LBBlurredImage.m in Sources */,
 				4368AE091DAE08B1006C38F5 /* MASConstraint.m in Sources */,
 				4368AE0A1DAE08B1006C38F5 /* MASConstraintMaker.m in Sources */,
 			);
@@ -423,6 +447,7 @@
 				4368ADEA1DAE07D0006C38F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
