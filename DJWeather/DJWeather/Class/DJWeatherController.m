@@ -9,15 +9,20 @@
 #import "DJWeatherController.h"
 #import "DJWeatherCell.h"
 #import "DJLineChatListModel.h"
+#import "UIImage+ImageEffects.h"
+#import "UIImageView+LBBlurredImage.h"
 //static CGFloat DJWeatherCelllWith = 320./2.;
 static NSString *K_DJWeatherCell = @"DJWeatherCell";
 
 @interface DJWeatherController()<UIScrollViewDelegate>
-
+{
+    UIImage *_backImage;
+}
 @property (nonatomic,strong)UICollectionView *collectionView;
 
 @property (nonatomic,strong)NSMutableArray *dataSource;
 @property (nonatomic,assign)CGPoint originOffest;
+@property (nonatomic,strong)UIImageView *tableBgView;
 
 @end
 
@@ -43,6 +48,17 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
     [self.tableView registerClass:[DJWeatherCell class] forCellReuseIdentifier:K_DJWeatherCell];
     self.tableView.backgroundColor = [UIColor grayColor];
     self.tableView.rowHeight = K_ScreenWidth/2;
+    _backImage  = [UIImage imageNamed:@"LaunchImage"];
+    UIImageView *backView = [[UIImageView alloc]initWithImage:_backImage];
+//    self.tableView.backgroundColor = [UIColor clearColor];
+    [backView setImageToBlur:_backImage blurRadius:0 completionBlock:^{
+        NSLog(@"设置完成");
+    }];
+    self.tableBgView = backView;
+    
+    [self.tableView setBackgroundView:backView];
+    
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
@@ -65,6 +81,7 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"DJUITableViewCell"];
         cell.textLabel.text = @"UITableViewCell";
     }
+    cell.backgroundColor = [UIColor clearColor];
    return  cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -82,6 +99,7 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offset_y = scrollView.contentOffset.y;
     [self dealWithOffset:offset_y];
+
 }
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     [self scrollOffest:scrollView.contentOffset.y scrollView:scrollView];
@@ -96,20 +114,24 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
         NSLog(@"%f 上移",offset_y - _originOffest.y);
         if (min_offest> offset_y) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            [self.tableBgView setImageToBlur:[UIImage imageNamed:@"LaunchImage"] blurRadius:30 completionBlock:^{
+                NSLog(@"设置完成");
+            }];
+
         }
 
     }else{ // 下移
         if (min_offest> offset_y) {
           [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+          [self.tableBgView setImageToBlur:[UIImage imageNamed:@"LaunchImage"] blurRadius:0. completionBlock:^{
+                NSLog(@"设置完成");
+            }];
         }
         NSLog(@"%f 下移",offset_y - _originOffest.y);
 
 
     }
-//    if (offset_y > 0 && offset_y < (K_ScreenHeight/2 - 64)) {
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//    }else if((K_ScreenHeight/2 - 64)<offset_y && offset_y > K_ScreenHeight*0.75 - 64){
-//   //    }
+
 
 }
 - (void)dealWithOffset:(CGFloat)offset_y{
@@ -136,14 +158,6 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
 - (void)reloadCollectionView:(CGFloat)width{
     DJWeatherCell *cell = (DJWeatherCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell.width_cell = width;
-}
-#pragma mark 曲线列表的代理
-- (void)userClickedOnLineKeyPoint:(CGPoint)point lineIndex:(NSInteger)lineIndex pointIndex:(NSInteger)pointIndex{
-    NSLog(@"Click Key on line %f, %f line index is %d and point index is %d",point.x, point.y,(int)lineIndex, (int)pointIndex);
-}
-
-- (void)userClickedOnLinePoint:(CGPoint)point lineIndex:(NSInteger)lineIndex{
-    NSLog(@"Click on line %f, %f, line index is %d",point.x, point.y, (int)lineIndex);
 }
 
 @end

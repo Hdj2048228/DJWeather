@@ -36,6 +36,7 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:@""];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         [self setup];
     }
     return self;
@@ -50,7 +51,6 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
     _dataSource = [NSMutableArray array];
    
     [self loadCollectionView];
-//    [self loadPNChartLineView];
 }
 - (void)loadCollectionView
 {
@@ -61,10 +61,9 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
     layout.sectionInset = UIEdgeInsetsMake(0., 0., 0., 0.);
 
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.backgroundColor = [UIColor clearColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
-    _collectionView.backgroundColor = [UIColor grayColor];
     [_collectionView registerClass:[DJWeatherCollectionCell class] forCellWithReuseIdentifier:K_DJWeatherCollectionCell];
     [self.contentView addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,12 +89,8 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
     DJWeatherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:K_DJWeatherCollectionCell forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.dataSource = self.dataSource;
-    CGFloat r,g,b;
-     r = arc4random()%255/255.0;
-     g = arc4random()%255/255.0;
-     b = arc4random()%255/255.0;
-    cell.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:1.];
-//    cell.backgroundColor = [UIColor clearColor];
+   
+    cell.backgroundColor = [UIColor clearColor];
     [cell setNeedsLayout];
     [cell setNeedsDisplay];
     return cell;

@@ -19,4 +19,5 @@
 #define K_DJWeatherHeaderHeight  0.75* K_ScreenHeight
 #define K_DJWeatherCellHeight    0.5* K_ScreenHeight
 
+#define DJRgba(r,g,b,a) [UIColor colorWithRed:r/255. green:g/255 blue:b/255. alpha:a]
 #endif /* DJDefines_h */

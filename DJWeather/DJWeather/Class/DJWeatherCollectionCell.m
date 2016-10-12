@@ -86,13 +86,13 @@ static CGFloat labelFont = 12.;
     path.lineWidth = 1.0;
     path.lineCapStyle = kCGLineCapSquare; //线条拐角
     path.lineJoinStyle = kCGLineJoinRound;
-    
-//    CGPoint nextPoint = [[self.model.pointsArray objectAtIndex:i+1] CGPointValue];
+   
     CGFloat radio = 1.;
     ((endtPoint.y - startPoint.y)>=0)?(radio):(radio=-radio);
     CGPoint  controlPoint = CGPointMake(endtPoint.x, endtPoint.y+radio);
     [path moveToPoint:startPoint];
-    UIColor *color = [UIColor redColor];
+    UIColor *color = DJRgba(255, 0, 0, (1-_views_alpha));
+
     [color set];
     
     [path addQuadCurveToPoint:endtPoint controlPoint:controlPoint];
