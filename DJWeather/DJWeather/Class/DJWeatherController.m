@@ -69,14 +69,13 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return  K_ScreenHeight/4*3;
+        return  K_DJWeatherHeaderHeight;
     }
-    return K_ScreenHeight/2;
+    return K_DJWeatherCellHeight;
 }
+// 获取滚动前的Offest
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-
     _originOffest = scrollView.contentOffset;
-    
 }
 
 
@@ -87,6 +86,7 @@ static NSString *K_DJWeatherCell = @"DJWeatherCell";
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     [self scrollOffest:scrollView.contentOffset.y scrollView:scrollView];
 }
+//根据偏移量滚动到相应的位置
 - (void)scrollOffest:(CGFloat)offset_y scrollView:(UIScrollView *)scrollView{
     
     CGFloat min_offest = K_DJWeatherHeaderHeight + K_DJWeatherCellHeight - K_ScreenHeight;
