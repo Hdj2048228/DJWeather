@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DJLineChatListModel.h"
 #import "DJDefines.h"
-
+#import "TQTWeather.h"
 @interface DJWeatherCell : UITableViewCell
 
 
 @property (nonatomic,strong)DJLineChatListModel *model;
+@property (nonatomic,strong)TQTWeather *tqtModel;
 
 @property (nonatomic,strong)NSMutableArray *dataSource;
 /**

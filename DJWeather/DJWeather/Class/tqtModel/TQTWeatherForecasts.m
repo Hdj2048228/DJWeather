@@ -18,7 +18,6 @@
 - (NSMutableArray *)lowTmpArray{
     if (_lowTmpArray == nil) {
         _lowTmpArray = [NSMutableArray array];
-        
         for (TQTWeatherForeca *foreca in self.foreca) {
             CGFloat low = foreca.low;
             [_lowTmpArray addObject:@(low)];
@@ -34,6 +33,6 @@
             [_highTmpArray addObject:@(high)];
         }
     }
-    return _lowTmpArray;
+    return _highTmpArray;
 }
 @end

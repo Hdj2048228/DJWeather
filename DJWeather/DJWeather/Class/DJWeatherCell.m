@@ -30,6 +30,15 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
     [_collectionView setNeedsLayout];
     [_collectionView setNeedsDisplay];
 }
+- (void)setTqtModel:(TQTWeather *)tqtModel{
+    _tqtModel = tqtModel;
+    [self.dataSource removeAllObjects];
+    [self.dataSource addObjectsFromArray:tqtModel.forecasts.lowTmpArray];
+    [_collectionView reloadData];
+    [_collectionView setNeedsLayout];
+    [_collectionView setNeedsDisplay];
+
+}
 - (NSInteger)visibleCount{
     return  (_visibleCount = ((_visibleCount == 0)?2:7));
 }
@@ -88,7 +97,13 @@ static NSString *K_DJWeatherCollectionCell = @"DJWeatherCollectionCell";
 {
     DJWeatherCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:K_DJWeatherCollectionCell forIndexPath:indexPath];
     cell.indexPath = indexPath;
-    cell.model = _model;
+    if (self.model) {
+         cell.model = _model;
+    }
+    if(self.tqtModel){
+        cell.tqtModel = _tqtModel;
+    }
+        
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }

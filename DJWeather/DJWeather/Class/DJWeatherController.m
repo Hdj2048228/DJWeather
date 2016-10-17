@@ -26,7 +26,7 @@ static NSString *K_DJWeatherTableViewBgImageName = @"leiyu_bg.jpg";
 @property (nonatomic,strong)NSMutableArray *dataSource;
 @property (nonatomic,assign)CGPoint originOffest;
 @property (nonatomic,strong)UIImageView *tableBgView;
-
+@property (nonatomic,strong)TQTWeather *tqtModel;
 @end
 
 @implementation DJWeatherController
@@ -53,20 +53,10 @@ static NSString *K_DJWeatherTableViewBgImageName = @"leiyu_bg.jpg";
         NSLog(@"dic %@",dic);
         TQTWeather *weather = [TQTWeather mj_objectWithKeyValues:dic];
         NSLog(@"%@",weather.mj_keyValues);
+        _tqtModel = weather;
+        [self.tableView reloadData];
     });
-//    [HYBNetworking configRequestType:kHYBRequestTypeJSON responseType:kHYBResponseTypeData shouldAutoEncodeUrl:YES callbackOnCancelRequest:NO];
-//   
-//   ;
-//    [HYBNetworking getWithUrl:urlStr refreshCache:YES success:^(id response) {
-//        NSError *error = nil;
-//      GDataXMLDocument *docment =  [[GDataXMLDocument alloc]initWithData:response options:0 error:&error];
-//        id obj = [docment rootElement];
-//        
-//        NSLog(@"%@",obj);
-//    } fail:^(NSError *error) {
-//        NSLog(@"error %@",error.description);
-//    }];
-   
+
     
 }
 
@@ -103,7 +93,8 @@ static NSString *K_DJWeatherTableViewBgImageName = @"leiyu_bg.jpg";
     if(indexPath.row == 1){
         cell = [tableView dequeueReusableCellWithIdentifier:K_DJWeatherCell];
         DJWeatherCell *weatherCell =  (DJWeatherCell *)cell;
-        weatherCell.model = [[DJLineChatListModel alloc]init];
+//        weatherCell.model = [[DJLineChatListModel alloc]init];
+        weatherCell.tqtModel = _tqtModel;
     }else{
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"DJUITableViewCell"];
         cell.textLabel.text = @"UITableViewCell";

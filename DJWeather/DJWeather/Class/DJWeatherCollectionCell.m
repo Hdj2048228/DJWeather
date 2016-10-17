@@ -44,6 +44,7 @@ static CGFloat coircle_radius = 3;
     return self;
 }
 
+
 - (void)setupViewsAlpha{
     for (UIView *view in _topHiddenViewsArray) {
         view.alpha = _views_alpha;
@@ -54,13 +55,17 @@ static CGFloat coircle_radius = 3;
 }
 - (void)drawRect:(CGRect)rect{
     [super drawRect:rect];
-    if (self.model) {
-        [self computePointByYValuesArray:_model.y_valueArray];
-        [self computePointByYValuesArray:_model.y_valueArray_2];
+    if (_highTmpArray.count > 0) {
+        [self computePointByYValuesArray:_highTmpArray];
     }
+    if (_lowTpmArray.count > 0) {
+        [self computePointByYValuesArray:_lowTpmArray];
+    }
+  
     
 }
 - (void)computePointByYValuesArray:(NSArray *)dataSource{
+
     CGFloat  y =  [[dataSource objectAtIndex:self.indexPath.row] floatValue];
     CGPoint currentPoint = CGPointMake(self.frame.size.width/2, y+self.frame.size.height/2);
     if (self.indexPath.row!=0) {
@@ -77,18 +82,37 @@ static CGFloat coircle_radius = 3;
 }
 - (void)setModel:(DJLineChatListModel *)model{
     _model = model;
+    [_lowTpmArray removeAllObjects];
+    [_lowTpmArray addObjectsFromArray:model.y_valueArray];
+    [_highTmpArray removeAllObjects];
+    [_highTmpArray addObjectsFromArray:model.y_valueArray_2];
     [self emptyLayers]; // 清空layers
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }
+- (void)setTqtModel:(TQTWeather *)tqtModel{
+    _tqtModel = tqtModel;
+    [_lowTpmArray removeAllObjects];
+    [_lowTpmArray addObjectsFromArray:tqtModel.forecasts.lowTmpArray];
+    [_highTmpArray removeAllObjects];
+    [_highTmpArray addObjectsFromArray:tqtModel.forecasts.highTmpArray];
+    [self emptyLayers]; // 清空layers
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
+
+}
 - (void)drawLine{
-    CGFloat  y =  [[self.model.y_valueArray objectAtIndex:self.indexPath.row] floatValue];
-    CGPoint currentPoint = CGPointMake(self.frame.size.width/2, y+self.frame.size.height/2);
-    [self drawCirclePoint:currentPoint];
-    
-    CGFloat  y2 =  [[self.model.y_valueArray_2 objectAtIndex:self.indexPath.row] floatValue];
-    CGPoint currentPoint2 = CGPointMake(self.frame.size.width/2, y2+self.frame.size.height/2);
-    [self drawCirclePoint:currentPoint2];
+    if (_lowTpmArray.count >0) {
+        CGFloat  y =  [[_lowTpmArray objectAtIndex:self.indexPath.row] floatValue];
+        CGPoint currentPoint = CGPointMake(self.frame.size.width/2, y+self.frame.size.height/2);
+        [self drawCirclePoint:currentPoint];
+    }
+   
+     if (_highTmpArray.count >0) {
+        CGFloat  y2 =  [[_highTmpArray objectAtIndex:self.indexPath.row] floatValue];
+        CGPoint currentPoint2 = CGPointMake(self.frame.size.width/2, y2+self.frame.size.height/2);
+        [self drawCirclePoint:currentPoint2];
+     }
  }
 
 - (void)layoutSubviews{
@@ -148,6 +172,8 @@ static CGFloat coircle_radius = 3;
 
 }
 - (void)setup{
+    _highTmpArray = [NSMutableArray array];
+    _lowTpmArray = [NSMutableArray array];
     _cicleLayersArray = [NSMutableArray array];
     _LineLayersArray = [NSMutableArray array];
     _pathsArray = [NSMutableArray array];
